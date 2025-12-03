@@ -13,7 +13,7 @@ export const useGameStore = defineStore('game', () => {
   const scrambleAnimation = ref(false)
   const showMessage = ref(false)
   const messageText = ref('')
-  const messageClass = ref('')
+  const messageClass = ref<'success' | 'error' | 'info'>('info')
   const loading = ref(false)
   const gameDate = ref('')
   const dailyInfo = ref<DailyInfo | null>(null)
@@ -27,11 +27,11 @@ export const useGameStore = defineStore('game', () => {
 
   const dailyDisplay = computed(() => {
     if (!gameDate.value) return 'Загрузка...'
-    
+
     const gameDateObj = new Date(gameDate.value)
     const todayObj = new Date()
     const isToday = gameDateObj.toDateString() === todayObj.toDateString()
-    
+
     if (isToday) {
       return `Сегодняшняя игра • ${foundCategories.value.length}/4 найдено`
     } else {
@@ -40,38 +40,38 @@ export const useGameStore = defineStore('game', () => {
   })
 
   // In the initializeGame function, add connection test:
-const initializeGame = async () => {
-  console.log('🔄 Initializing game...')
-  loading.value = true
-  try {
-    const response = await gameApi.getGame()
-    console.log('✅ Game data in store:', response)
-    
-    // Make sure we're setting the words correctly
-    if (response.words && Array.isArray(response.words)) {
-      words.value = response.words
-      console.log('📝 Words set in store:', words.value)
-    } else {
-      console.error('❌ No words in response:', response)
-      words.value = [] // Ensure it's always an array
+  const initializeGame = async () => {
+    console.log('🔄 Initializing game...')
+    loading.value = true
+    try {
+      const response = await gameApi.getGame()
+      console.log('✅ Game data in store:', response)
+
+      // Make sure we're setting the words correctly
+      if (response.words && Array.isArray(response.words)) {
+        words.value = response.words
+        console.log('📝 Words set in store:', words.value)
+      } else {
+        console.error('❌ No words in response:', response)
+        words.value = [] // Ensure it's always an array
+      }
+
+      gameDate.value = response.game_date
+      resetGameState()
+
+      await checkDayChange()
+    } catch (error) {
+      console.error('❌ Error loading game:', error)
+      showMessage.value = true
+      messageText.value = 'Ошибка загрузки игры'
+      messageClass.value = 'error'
+      // Set empty arrays to prevent rendering errors
+      words.value = []
+      foundCategories.value = []
+    } finally {
+      loading.value = false
     }
-    
-    gameDate.value = response.game_date
-    resetGameState()
-    
-    await checkDayChange()
-  } catch (error) {
-    console.error('❌ Error loading game:', error)
-    showMessage.value = true
-    messageText.value = 'Ошибка загрузки игры'
-    messageClass.value = 'error'
-    // Set empty arrays to prevent rendering errors
-    words.value = []
-    foundCategories.value = []
-  } finally {
-    loading.value = false
   }
-}
 
   const checkDayChange = async () => {
     try {
@@ -92,7 +92,7 @@ const initializeGame = async () => {
 
   const toggleWord = (word: string) => {
     if (gameOver.value) return
-    
+
     const index = selectedWords.value.indexOf(word)
     if (index > -1) {
       selectedWords.value.splice(index, 1)
@@ -112,10 +112,10 @@ const initializeGame = async () => {
     const shuffled = [...words.value]
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
-      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+        ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
     }
     words.value = shuffled
-    
+
     setTimeout(() => {
       scrambleAnimation.value = false
     }, 300)
@@ -123,7 +123,7 @@ const initializeGame = async () => {
 
   const submitGuess = async () => {
     if (selectedWords.value.length !== 4) return
-    
+
     console.log('📤 Submitting guess:', selectedWords.value)
     loading.value = true
     try {
@@ -137,7 +137,7 @@ const initializeGame = async () => {
       }
     } catch (error: any) {
       console.error('❌ Error submitting guess:', error)
-      
+
       // Show detailed error information
       if (error.response) {
         console.error('Response error:', error.response.data)
@@ -162,12 +162,12 @@ const initializeGame = async () => {
     showMessage.value = true
     messageText.value = `Правильно! "${result.category_name}"`
     messageClass.value = 'success'
-    
+
     foundCategories.value.push({
       name: result.category_name!,
       words: [...selectedWords.value]
     })
-    
+
     // Remove found words from available words
     words.value = words.value.filter(word => !selectedWords.value.includes(word))
     selectedWords.value = []
@@ -226,11 +226,11 @@ const initializeGame = async () => {
     loading,
     gameDate,
     dailyInfo,
-    
+
     // Getters
     gameStatus,
     dailyDisplay,
-    
+
     // Actions
     initializeGame,
     toggleWord,
