@@ -37,7 +37,7 @@ export const gameApi = {
     }
 
     try {
-      const response = await api.get('/game')
+      const response = await api.get('/api/game')
       console.log('✅ Game data received:', response.data)
       console.log('📝 Words count:', response.data.words?.length)
       console.log('📝 Words:', response.data.words)
@@ -51,7 +51,7 @@ export const gameApi = {
   async checkSelection(selectedWords: string[]): Promise<CheckSelectionResponse> {
     console.log('📤 Submitting selection:', selectedWords)
     try {
-      const response = await api.post('/check_selection', selectedWords)
+      const response = await api.post('/api/check_selection', selectedWords)
       console.log('✅ Selection response:', response.data)
       return response.data
     } catch (error: any) {
@@ -65,12 +65,12 @@ export const gameApi = {
   },
 
   async getGameStatus() {
-    const response = await api.get('/game_status')
+    const response = await api.get('/api/game_status')
     return response.data
   },
 
   async getDailyInfo(): Promise<DailyInfo> {
-    const response = await api.get('/daily_info')
+    const response = await api.get('/api/daily_info')
     return response.data
   }
 }
