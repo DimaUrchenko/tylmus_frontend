@@ -58,11 +58,11 @@ const initializeGame = async () => {
     // Теперь устанавливаем слова, УДАЛЯЯ уже найденные
     if (response.words && Array.isArray(response.words)) {
       // Получаем все найденные слова из восстановленных категорий
-      const foundWords = foundCategories.value.flatMap(category => category.words)
+      const foundWords = foundCategories.value.flatMap((category: Category) => category.words)
       console.log('🗑️ Removing found words from available:', foundWords)
       
       // Фильтруем слова, оставляя только те, которые еще не найдены
-      words.value = response.words.filter(word => !foundWords.includes(word))
+      words.value = response.words.filter((word: string) => !foundWords.includes(word))
       console.log('📝 Available words after filtering:', words.value)
     } else {
       console.error('❌ No words in response:', response)
@@ -192,7 +192,7 @@ const toggleWord = (word: string) => {
     })
     
     // Remove found words from available words
-    words.value = words.value.filter(word => !selectedWords.value.includes(word))
+    words.value = words.value.filter((word: string) => !selectedWords.value.includes(word))
     selectedWords.value = []
 
     if (result.game_complete) {
