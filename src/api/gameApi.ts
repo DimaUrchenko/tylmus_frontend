@@ -2,7 +2,7 @@ import axios from 'axios'
 import type { CheckSelectionResponse, DailyInfo } from '../types/game'
 
 // Use absolute URL to ensure connection
-const API_BASE_URL = 'https://tylmus-tylmus-backend-a4a1.twc1.net/'
+const API_BASE_URL = 'https://tylmus-tylmus-backend-a4a1.twc1.net'
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -17,7 +17,7 @@ const api = axios.create({
 export const testConnection = async () => {
   try {
     console.log('🔗 Testing connection to:', API_BASE_URL)
-    const response = await axios.get('http://localhost:8000/')
+    const response = await axios.get(`${API_BASE_URL}/`)
     console.log('✅ Backend is reachable:', response.data)
     return true
   } catch (error) {
