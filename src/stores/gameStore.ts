@@ -113,7 +113,7 @@ const resetGameState = () => {
   showMessage.value = false
 }
 
-  const toggleWord = (word: string) => {
+const toggleWord = (word: string) => {
     if (gameOver.value) return
     
     const index = selectedWords.value.indexOf(word)
@@ -260,6 +260,7 @@ const resetGameState = () => {
     deselectAll,
     shuffleWords,
     submitGuess,
-    getCategoryColor
+    getCategoryColor,
+    resetGameState
   }
 })
