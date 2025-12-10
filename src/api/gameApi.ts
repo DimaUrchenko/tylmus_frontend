@@ -1,7 +1,8 @@
 import axios from 'axios'
 import type { CheckSelectionResponse, DailyInfo, GameResponse } from '../types/game'
 
-const API_BASE_URL = 'https://tylmus.ru'
+// Домен бэкенда
+const API_BASE_URL = 'https://tylmus-tylmus-backend-a4a1.twc1.net'
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -9,13 +10,13 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  withCredentials: true
+  withCredentials: true  // Важно для куков между доменами
 })
 
 export const testConnection = async () => {
   try {
     console.log('🔗 Testing connection to:', API_BASE_URL)
-    const response = await axios.get(`${API_BASE_URL}`)
+    const response = await axios.get(API_BASE_URL)
     console.log('✅ Backend is reachable:', response.data)
     return true
   } catch (error) {
@@ -26,7 +27,7 @@ export const testConnection = async () => {
 
 export const gameApi = {
   async getGame(): Promise<GameResponse> {
-    console.log('🚀 Fetching game from:', `${API_BASE_URL}/game`)
+    console.log('🚀 Fetching game from:', `${API_BASE_URL}/api/game`)
 
     const connected = await testConnection()
     if (!connected) {
