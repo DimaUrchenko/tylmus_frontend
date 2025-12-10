@@ -145,7 +145,7 @@
       <div class="corner corner-bottom-left">
         <img 
           src="/public/img/corner-bottom-left.svg" 
-          alt="Decorative corner" 
+          alt="Decorativ	e corner" 
         />
       </div>
       <div class="corner corner-bottom-right ">
@@ -369,10 +369,12 @@ watch(() => gameStore.gameOver, (newVal) => {
   justify-content: center;
 }
 
-/* Category blocks - removed margin to use grid gap instead */
+/* Category blocks - same height as word cards */
 .category-block {
   margin: 0; /* Remove margin, use grid gap instead */
   grid-column: 1 / span 4;
+  min-height: 60px; /* Same as word cards */
+  padding: 10px; /* Reduce padding to match height */
 }
 
 /* Loading state with fixed height */
@@ -614,21 +616,61 @@ watch(() => gameStore.gameOver, (newVal) => {
   }
 }
 
-/* Tablet (768px to 991px) */
+/* Tablet (768px to 991px) - FIXED */
 @media (min-width: 768px) and (max-width: 991px) {
   .instruction-image {
     max-width: 50%;
     margin-left: auto;
     margin-right: auto;
   }
+  
+  /* Fixed: Always use 4 columns on tablet */
+  .combined-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-width: 600px;
+    min-height: 350px;
+  }
+  
+  .grid-item {
+    min-height: 45px;
+    font-size: 13px;
+    padding: 8px 4px;
+  }
+  
+  .category-block {
+    grid-column: 1 / span 4;
+    min-height: 45px;
+    padding: 8px;
+  }
 }
 
-/* Tablet (576px to 767px) */
+/* Small Tablet (576px to 767px) - FIXED */
 @media (min-width: 576px) and (max-width: 767px) {
   .instruction-image {
     max-width: 60%;
     margin-left: auto;
     margin-right: auto;
+  }
+  
+  /* Fixed: Always use 4 columns on small tablet */
+  .combined-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    max-width: 500px;
+    min-height: 300px;
+  }
+  
+  .grid-item {
+    min-height: 40px;
+    font-size: 12px;
+    padding: 6px 3px;
+  }
+  
+  .category-block {
+    grid-column: 1 / span 4;
+    min-height: 40px;
+    padding: 6px;
   }
 }
 
@@ -654,9 +696,9 @@ watch(() => gameStore.gameOver, (newVal) => {
   
   .combined-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px; /* Consistent gap */
-    max-width: 500px; /* Adjusted for mobile */
-    min-height: 350px; /* Adjusted for mobile */
+    gap: 8px;
+    max-width: 500px;
+    min-height: 350px;
   }
   
   .grid-item {
@@ -665,9 +707,15 @@ watch(() => gameStore.gameOver, (newVal) => {
     padding: 8px 4px;
   }
   
+  .category-block {
+    grid-column: 1 / span 2;
+    min-height: 45px;
+    padding: 8px;
+  }
+  
   .loading,
   .no-words {
-    min-height: 350px; /* Match mobile grid height */
+    min-height: 350px;
   }
   
   .about-section,
@@ -709,7 +757,7 @@ watch(() => gameStore.gameOver, (newVal) => {
 @media (max-width: 576px) {
   .game-screen {
     padding: 12px 5px;
-    min-height: 400px; /* Adjusted for small mobile */
+    min-height: 400px;
   }
   
   .container {
@@ -718,9 +766,9 @@ watch(() => gameStore.gameOver, (newVal) => {
   
   .combined-grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 4px; /* Consistent gap */
-    max-width: 400px; /* Adjusted for small mobile */
-    min-height: 300px; /* Adjusted for small mobile */
+    gap: 4px;
+    max-width: 400px;
+    min-height: 300px;
   }
   
   .grid-item {
@@ -729,9 +777,15 @@ watch(() => gameStore.gameOver, (newVal) => {
     padding: 6px 2px;
   }
   
+  .category-block {
+    grid-column: 1 / span 4;
+    min-height: 40px;
+    padding: 6px;
+  }
+  
   .loading,
   .no-words {
-    min-height: 300px; /* Match small mobile grid height */
+    min-height: 300px;
   }
   
   .about-section,
@@ -780,13 +834,17 @@ watch(() => gameStore.gameOver, (newVal) => {
     font-size: 11px;
   }
   
+  .category-block {
+    min-height: 35px;
+  }
+  
   .combined-grid {
-    min-height: 280px; /* Adjusted for very small screens */
+    min-height: 280px;
   }
   
   .loading,
   .no-words {
-    min-height: 280px; /* Match very small mobile grid height */
+    min-height: 280px;
   }
   
   .about-title {
