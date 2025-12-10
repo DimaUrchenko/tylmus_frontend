@@ -1,3 +1,6 @@
+/* Import Montserrat from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,10 +8,20 @@
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Montserrat', 'Arial', sans-serif;
     background: rgb(255, 255, 255);
     min-height: 100vh;
     padding: 20px;
+}
+
+/* For bolder text where Montserrat's weight matters */
+h1, h2, h3, h4, h5, h6,
+.game-header,
+.category-block,
+.word-card,
+.btn-control, .btn-submit {
+    font-family: 'Montserrat', 'Arial', sans-serif;
+    font-weight: 600; /* Montserrat has nice weight variations */
 }
 
 .container {
@@ -51,7 +64,7 @@ body {
     border: 2px solid #d3fbe3;
     border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 600; /* Changed from bold to specific weight */
     transition: all 0.3s ease;
     user-select: none;
     width: 100%;
@@ -72,7 +85,7 @@ body {
     padding: 20px;
     border-radius: 8px;
     color: #333;
-    font-weight: bold;
+    font-weight: 600; /* Changed from bold to specific weight */
     text-align: center;
     grid-column: 1 / span 4;
     width: 100%;
@@ -92,7 +105,7 @@ body {
 .category-words {
     font-size: 0.9em;
     opacity: 0.8;
-    font-weight: normal;
+    font-weight: 500; /* Medium weight for contrast */
 }
 
 .category-block.yellow { background: #ffcc95; }
@@ -132,9 +145,10 @@ body {
     border-radius: 10px;
     cursor: pointer;
     font-size: 1em;
-    font-weight: bold;
+    font-weight: 600; /* Changed from bold to specific weight */
     background: white;
     transition: all 0.3s ease;
+    font-family: 'Montserrat', 'Arial', sans-serif;
 }
 
 .btn-control:hover, .btn-submit:not(:disabled):hover {
@@ -151,7 +165,7 @@ body {
     padding: 15px;
     border-radius: 5px;
     text-align: center;
-    font-weight: bold;
+    font-weight: 600;
     margin-top: 20px;
 }
 
@@ -174,7 +188,7 @@ body {
 
 .spellbee-container h3 {
     margin-bottom: 30px;
-    font-weight: bold;
+    font-weight: 700; /* Bold weight for headings */
 }
 
 .spellbee-container ul li {
@@ -187,6 +201,7 @@ body {
 .spellbee-container ul li h4 {
     color: #333;
     margin-bottom: 10px;
+    font-weight: 600;
 }
 
 .spellbee-container img {
