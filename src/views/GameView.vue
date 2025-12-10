@@ -197,7 +197,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, ref, computed, onUnmounted, watch } from 'vue'
 import { useGameStore } from '../stores/gameStore'
 import GameHeader from '../components/GameHeader.vue'
 import WordCard from '../components/WordCard.vue'
