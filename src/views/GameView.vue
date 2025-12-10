@@ -254,12 +254,18 @@ const formatTimeRemaining = (endTime: Date): string => {
   return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
 }
 
+// Reactive value to force updates
+const forceUpdate = ref(0)
+
 // Computed property for game over text with countdown
 const gameOverErrorText = computed(() => {
   if (!gameStore.gameOver || gameStore.foundCategories.length === 4) return ""
   
   const nextMidnight = getNextMidnightGMT9()
   const timeRemaining = formatTimeRemaining(nextMidnight)
+  
+  // Use forceUpdate to make TypeScript happy
+  void forceUpdate.value
   
   return `Игра окончена! Слишком много ошибок. Следующая игра будет доступна через: ${timeRemaining}`
 })
@@ -269,6 +275,9 @@ const gameOverErrorTextWin = computed(() => {
   
   const nextMidnight = getNextMidnightGMT9()
   const timeRemaining = formatTimeRemaining(nextMidnight)
+  
+  // Use forceUpdate to make TypeScript happy
+  void forceUpdate.value
   
   return `Поздравляем! Вы нашли все категории! Следующая игра будет доступна через: ${timeRemaining}`
 })
@@ -280,11 +289,9 @@ const startCountdownTimer = () => {
   }
   
   if (gameStore.gameOver) {
-    // Force computed properties to update
+    // Force computed properties to update by incrementing forceUpdate
     countdownInterval.value = setInterval(() => {
-      // This triggers the computed properties to recalculate
-      const temp1 = gameOverErrorText.value
-      const temp2 = gameOverErrorTextWin.value
+      forceUpdate.value++
     }, 1000)
   }
 }
