@@ -236,7 +236,6 @@ const getNextMidnightGMT9 = (): Date => {
   return localNextMidnight
 }
 
-// Format time remaining
 const formatTimeRemaining = (endTime: Date): string => {
   const now = new Date()
   const diff = endTime.getTime() - now.getTime()
@@ -308,7 +307,6 @@ watch(() => gameStore.gameOver, (newVal) => {
     countdownInterval.value = null
   }
 })
-</script>
 </script>
 
 <style scoped>
