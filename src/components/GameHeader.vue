@@ -70,15 +70,33 @@ onUnmounted(() => {
   font-weight: 500;
 }
 
-/* Mobile responsive */
+/* Tablet */
+@media (max-width: 991px) {
+  .game-header {
+    padding: 12px 15px;
+    margin-bottom: 20px;
+  }
+  
+  .game-title {
+    font-size: 1.3rem;
+  }
+  
+  .daily-info-mobile {
+    font-size: 0.75rem;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .game-header {
     padding: 10px 12px;
     margin-bottom: 15px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.1); /* Lighter shadow */
   }
   
   .game-title {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
   }
   
   .daily-info-mobile {
@@ -86,18 +104,34 @@ onUnmounted(() => {
   }
 }
 
+/* Small Mobile */
 @media (max-width: 576px) {
   .game-header {
     padding: 8px 10px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .game-title {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .daily-info-mobile {
+    font-size: 0.65rem;
+    display: none; /* Hide on very small screens to save space */
+  }
+}
+
+/* Very Small Mobile */
+@media (max-width: 400px) {
+  .game-header {
+    padding: 6px 8px;
     margin-bottom: 10px;
   }
   
   .game-title {
-    font-size: 1.1rem;
-  }
-  
-  .daily-info-mobile {
-    display: none; /* Hide completely on very small screens */
+    font-size: 0.9rem;
   }
 }
 </style>

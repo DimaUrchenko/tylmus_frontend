@@ -908,6 +908,49 @@ watch(() => gameStore.gameOver, (newVal) => {
     min-height: 40px;
     padding: 6px;
   }
+  @media (max-width: 576px) {
+  /* ... existing styles ... */
+  
+  /* Additional button spacing for mobile */
+  .controls {
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Make everything more compact on very small screens */
+  .game-screen {
+    padding: 10px 5px;
+    min-height: 380px;
+  }
+  
+  .combined-grid {
+    gap: 3px;
+  }
+  
+  .grid-item {
+    min-height: 35px;
+    font-size: 11px;
+    padding: 4px 2px;
+  }
+  
+  .category-block {
+    min-height: 35px;
+    padding: 4px;
+  }
+  
+  .game-info {
+    margin: 8px 0;
+  }
+  
+  .mistakes {
+    font-size: 12px;
+  }
+  
+  .mistake {
+    font-size: 14px;
+  }
+}
 }
 
 }
