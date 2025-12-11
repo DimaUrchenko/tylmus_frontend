@@ -101,7 +101,7 @@ defineEmits<Emits>()
   
   .btn-control, .btn-submit {
     padding: 10px 8px;
-    font-size: 0.9em;
+    font-size: 0.8em;
     max-width: 120px;
     flex: 1 1 0; /* Equal distribution */
   }
@@ -118,7 +118,7 @@ defineEmits<Emits>()
   
   .btn-control, .btn-submit {
     padding: 8px 6px;
-    font-size: 0.85em;
+    font-size: 0.7em;
     max-width: 100px;
     border-radius: 6px;
     border-width: 1px;
@@ -145,7 +145,7 @@ defineEmits<Emits>()
   
   .btn-control, .btn-submit {
     padding: 6px 4px;
-    font-size: 0.75em;
+    font-size: 0.6em;
     max-width: 85px;
     flex: 1 1 0; /* Equal distribution */
   }
@@ -160,7 +160,7 @@ defineEmits<Emits>()
   
   .btn-control, .btn-submit {
     padding: 5px 3px;
-    font-size: 0.7em;
+    font-size: 0.5em;
     max-width: 75px;
     min-height: 36px;
     flex: 1 1 0; /* Equal distribution */
@@ -171,7 +171,7 @@ defineEmits<Emits>()
 @media (max-width: 320px) {
   .btn-control, .btn-submit {
     padding: 4px 2px;
-    font-size: 0.65em;
+    font-size: 0.45em;
     max-width: 70px;
     flex: 1 1 0; /* Equal distribution */
   }
