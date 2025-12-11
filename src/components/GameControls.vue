@@ -2,11 +2,11 @@
   <div class="controls">
     <button @click="$emit('deselect-all')" class="btn-control">
       <span class="btn-text">Снять отметку</span>
-      <span class="btn-text-mobile">Снять</span>
+      <span class="btn-text-mobile">Снять отметку</span>
     </button>
     <button @click="$emit('shuffle-words')" class="btn-control">
       <span class="btn-text">Перемешать</span>
-      <span class="btn-text-mobile">Мешать</span>
+      <span class="btn-text-mobile">Перемешать</span>
     </button>
     <button 
       @click="$emit('submit-guess')" 
@@ -15,7 +15,7 @@
       :class="{ 'enabled': canSubmit }"
     >
       <span class="btn-text">Подтвердить</span>
-      <span class="btn-text-mobile">Готово</span>
+      <span class="btn-text-mobile">Подтвердить</span>
     </button>
   </div>
 </template>
@@ -39,10 +39,14 @@ defineEmits<Emits>()
 <style scoped>
 .controls {
   display: flex;
+  flex-direction: row; /* EXPLICITLY SET TO ROW */
+  flex-wrap: nowrap; /* PREVENT WRAPPING */
   gap: 8px;
   justify-content: center;
+  align-items: center; /* Center vertically */
   margin-bottom: 20px;
   padding: 0 5px;
+  width: 100%;
 }
 
 .btn-control, .btn-submit {
@@ -54,11 +58,11 @@ defineEmits<Emits>()
   font-weight: bold;
   background: white;
   transition: all 0.3s ease;
-  flex: 1;
+  flex: 1 1 auto; /* Allow growth and shrinkage */
   min-width: 0; /* Allow buttons to shrink below min-content */
   max-width: 150px; /* Maximum width for desktop */
   text-align: center;
-  position: relative;
+  white-space: nowrap; /* Prevent text from wrapping inside button */
 }
 
 .btn-control:hover, .btn-submit:not(:disabled):hover {
@@ -91,12 +95,15 @@ defineEmits<Emits>()
   .controls {
     gap: 6px;
     margin-bottom: 15px;
+    padding: 0 4px;
+    flex-direction: row !important; /* FORCE ROW */
   }
   
   .btn-control, .btn-submit {
-    padding: 10px 12px;
+    padding: 10px 8px;
     font-size: 0.9em;
-    max-width: 130px;
+    max-width: 120px;
+    flex: 1 1 0; /* Equal distribution */
   }
 }
 
@@ -106,14 +113,16 @@ defineEmits<Emits>()
     gap: 4px;
     margin-bottom: 12px;
     padding: 0 3px;
+    flex-direction: row !important; /* FORCE ROW */
   }
   
   .btn-control, .btn-submit {
     padding: 8px 6px;
     font-size: 0.85em;
-    max-width: 110px;
+    max-width: 100px;
     border-radius: 6px;
     border-width: 1px;
+    flex: 1 1 0; /* Equal distribution */
   }
   
   /* Show mobile text, hide desktop text */
@@ -130,25 +139,15 @@ defineEmits<Emits>()
 @media (max-width: 480px) {
   .controls {
     gap: 3px;
+    padding: 0 2px;
+    flex-direction: row !important; /* FORCE ROW */
   }
   
   .btn-control, .btn-submit {
     padding: 6px 4px;
     font-size: 0.75em;
-    max-width: 90px;
-  }
-  
-  /* Even shorter text for very small screens */
-  .btn-control:first-child .btn-text-mobile {
-    content: "Снять";
-  }
-  
-  .btn-control:nth-child(2) .btn-text-mobile {
-    content: "Мешать";
-  }
-  
-  .btn-submit .btn-text-mobile {
-    content: "Готово";
+    max-width: 85px;
+    flex: 1 1 0; /* Equal distribution */
   }
 }
 
@@ -156,13 +155,15 @@ defineEmits<Emits>()
 @media (max-width: 360px) {
   .controls {
     gap: 2px;
+    flex-direction: row !important; /* FORCE ROW */
   }
   
   .btn-control, .btn-submit {
     padding: 5px 3px;
     font-size: 0.7em;
-    max-width: 80px;
-    min-height: 36px; /* Ensure buttons have minimum height */
+    max-width: 75px;
+    min-height: 36px;
+    flex: 1 1 0; /* Equal distribution */
   }
 }
 
@@ -171,7 +172,8 @@ defineEmits<Emits>()
   .btn-control, .btn-submit {
     padding: 4px 2px;
     font-size: 0.65em;
-    max-width: 75px;
+    max-width: 70px;
+    flex: 1 1 0; /* Equal distribution */
   }
 }
 </style>
